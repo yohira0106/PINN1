@@ -1,0 +1,25 @@
+tf.reset_default_graph() 
+→
+tf.compat.v1.reset_default_graph()
+
+AttributeError: module 'tensorflow' has no attribute 'reset_default_graph'
+
+
+11/02
+L-BFGS オプティマイザをtensorflow2環境で動かしたい
+tfp.optimizer.lbfgs_minimizeを用いて書く。
+
+11/03
+xavier_initのtruncatedとrandom.truncatedに
+tf.placeholderの書き換え　tf.Variableに
+    →あとでconcatするためにテンソルの形にすべし
+
+net_uvにself.x_int_tfを食わせる
+245, tf.dict のところself.x_int_tf: X_f[:,0:1]
+
+net_uvに食わせる変数
+self.x_int_tf,self.y_int_tf
+
+
+
+
