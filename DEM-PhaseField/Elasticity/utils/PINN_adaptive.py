@@ -174,27 +174,26 @@ class Elasticity2D:
             tape.watch(y)
 
             u, v = self.net_uv(x, y)
-            u_x = tape.gradient(u, x)
-            u_xx = tape.gradient(u_x, x)
-            v_y = tape.gradient(v, y)
-            v_yx = tape.gradient(v_y, x)
-            u_y = tape.gradient(u, y)
-            u_yy = tape.gradient(u_y, y)
-            v_x = tape.gradient(v, x)
-            v_xy = tape.gradient(v_x, y)
+        u_x = tape.gradient(u, x)
+        u_xx = tape.gradient(u_x, x)
+        v_y = tape.gradient(v, y)
+        v_yx = tape.gradient(v_y, x)
+        u_y = tape.gradient(u, y)
+        u_yy = tape.gradient(u_y, y)
+        v_x = tape.gradient(v, x)
+        v_xy = tape.gradient(v_x, y)
+        
+        f_u = -(self.c11 * u_xx + self.c12 * v_yx + self.c33 * u_yy + self.c33 * v_xy)
 
-            u_xy = tape.gradient(u_x, y)
-            v_yy = tape.gradient(v_y, y)
-            u_yx = tape.gradient(u_y, x)
-            v_xx = tape.gradient(v_x, x)
+        u_xy = tape.gradient(u_x, y)
+        v_yy = tape.gradient(v_y, y)
+        u_yx = tape.gradient(u_y, x)
+        v_xx = tape.gradient(v_x, x)
         
         # 不要になった tape を削除
         del tape
 
-        f_u = -(self.c11 * u_xx + self.c12 * v_yx + self.c33 * u_yy + self.c33 * v_xy)
         f_v = -(self.c21 * u_xy + self.c22 * v_yy + self.c33 * u_yx + self.c33 * v_xx)
-
-            # 必要ならば tape.gradient() で取得した勾配を使用する
           
         return f_u, f_v
 
@@ -259,10 +258,10 @@ class Elasticity2D:
             tape.watch(y)
 
             u, v = self.net_uv(x, y)
-            u_x = tape.gradient(u, x)[0]
-            u_y = tape.gradient(u, y)[0]
-            v_y = tape.gradient(v, y)[0]
-            v_x = tape.gradient(v, x)[0]
+        u_x = tape.gradient(u, x)[0]
+        u_y = tape.gradient(u, y)[0]
+        v_y = tape.gradient(v, y)[0]
+        v_x = tape.gradient(v, x)[0]
         # 不要になった tape を削除
         del tape
 
